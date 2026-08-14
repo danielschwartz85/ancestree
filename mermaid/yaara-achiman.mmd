@@ -1,0 +1,47 @@
+flowchart TB
+    SB["שמואל בר לוי"] --- YF["יפה"]
+
+    SB --> YAEL["יעל בר לוי"]
+    SB --> RU["רוחלה"]
+    SB --> NET["נטע"]
+
+    NET --- HG["חן גוטמן"]
+    NET --> YIF["יפעת"]
+    NET --> DOR["דור"]
+    NET --> SHN["שני"]
+
+    RU --> NA["נעמה"]
+    RU --> DAV["דוד"]
+    RU --> R1["בת נוספת"]
+    RU --> R2["בת נוספת"]
+
+    HN["חנוך חלמניק"] --- YEH["יהודית נוייגרשל"]
+
+    HN --> RAMI["רמי אחירם"]
+    HN --> YIN["ינון אחירם"]
+
+    RAMI --- YAEL
+    RAMI --> YAARA["יערה אחימן"]
+
+    YIN --- ADA["אדה"]
+
+    YIN --> ELI["אלישע"]
+    YIN --> AMI["אמיתי"]
+    YIN --> EIN["עינת"]
+    YIN --> MER["מירב"]
+    YIN --> URI["אורי"]
+    YIN --> AVI["אבישי"]
+    YIN --> ELH["אלחנן"]
+    YIN --> EIT["איתן ישראל"]
+
+    EIN --> ELY["אלייה"]
+    EIN --> YON["יונתן"]
+
+    YAARA --> LAV["לביא"]
+    YAARA --> BER["בארי"]
+
+    classDef male fill:#cfe8ff,stroke:#4a90e2,color:#111;
+    classDef female fill:#ffd6e7,stroke:#d66b9c,color:#111;
+
+    class SB,HG,HN,RAMI,YIN,ELI,AMI,URI,AVI,ELH,EIT,YON,LAV,BER,DOR,DAV male;
+    class YF,YAEL,RU,NET,YIF,SHN,NA,YEH,YAARA,ADA,EIN,MER,ELY,R1,R2 female;

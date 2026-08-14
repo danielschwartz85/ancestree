@@ -1,0 +1,24 @@
+flowchart TB
+    SAR["שרה"] --- OSC["אוסקר"]
+
+    SAR --> EM["עמנואל"]
+    OSC --> EM
+
+    SAR --> EL["אלינור"]
+    SAR --> UB["אח נוסף של עמנואל"]
+
+    RAV["רווית שוורץ"] --- EM
+
+    RAV --> OL["אוליבר"]
+
+    RAV --- URI["אורי"]
+
+    URI --> ROM["רומי"]
+    URI --> JOH["ג'וני"]
+    URI --> MIA["מיה"]
+
+    classDef male fill:#cfe8ff,stroke:#4a90e2,color:#111;
+    classDef female fill:#ffd6e7,stroke:#d66b9c,color:#111;
+
+    class OSC,EM,UB,URI,OL,JOH male;
+    class SAR,EL,RAV,ROM,MIA female;

@@ -1,0 +1,39 @@
+flowchart TB
+    YAL["יהודה אריה לייב"] --- BEL["בלה"]
+    YAL --> MOS["משה פלוטניק (מוסא)"]
+
+    SH["שמעון עקרי"] --- NANA["נעימה (ננה)"]
+
+    SH --> YOR["יורם"]
+    SH --> SAS["ששון"]
+    SH --> YAK["יעקב"]
+    SH --> AVN["אבנר"]
+    SH --> TK["תקווה פלוטניק"]
+
+    NANA --> YOR
+    NANA --> SAS
+    NANA --> YAK
+    NANA --> AVN
+    NANA --> TK
+
+    MOS --- TK
+
+    MOS --> MEL["מלי פלוטניק"]
+    MOS --> UDI["אודי פלוטניק"]
+    MOS --> BECKY["בקי פלוטניק"]
+    MOS --> NOA["נועה פלוטניק"]
+
+    UDI --- DEBI["דבי"]
+
+    BECKY --- TUVIA["טוביה"]
+    BECKY --> CHEN["חן"]
+
+    LIV["ליביו שוורץ"] --- MEL
+    LIV --> MOSH["משה שוורץ"]
+    LIV --> MEIR["מאיר שוורץ"]
+
+    classDef male fill:#cfe8ff,stroke:#4a90e2,color:#111;
+    classDef female fill:#ffd6e7,stroke:#d66b9c,color:#111;
+
+    class YAL,MOS,SH,YOR,SAS,YAK,AVN,UDI,TUVIA,CHEN,LIV,MOSH,MEIR male;
+    class BEL,NANA,TK,MEL,BECKY,NOA,DEBI female;

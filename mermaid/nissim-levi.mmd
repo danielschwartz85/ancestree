@@ -1,0 +1,20 @@
+flowchart TB
+    M["משולם"] --> N["ניסים (מיקי) לוי"]
+    M --> B["בלה משולם"]
+
+    N --- R["רחל וישן"]
+    N --> I["אילנה שוורץ"]
+
+    B --> S["שמחה (סופקה)"]
+
+    S --- SH["שמוליק"]
+
+    S --> MOR["מורן"]
+    S --> YAN["יניב"]
+    S --> AS["אסי"]
+
+    classDef male fill:#cfe8ff,stroke:#4a90e2,color:#111;
+    classDef female fill:#ffd6e7,stroke:#d66b9c,color:#111;
+
+    class M,N,SH,YAN,AS male;
+    class B,R,I,S,MOR female;

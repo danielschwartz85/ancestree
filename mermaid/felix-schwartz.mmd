@@ -1,0 +1,18 @@
+flowchart TB
+
+    OZI["אוסיאס פליקס"] --- SARAH["שרה דבורה (סופיה) סלומון"]
+    OZI --> MARIETTA["מריאטה"]
+
+    ELIEZER["אליעזר (לייזר) שוורץ"] --- HANNA["חנה וינגרטן"]
+    ELIEZER --> BARCO["דב (ברקו) שוורץ"]
+
+    MARIETTA --- BARCO
+
+    MARIETTA --> LIVIO["ליביו שוורץ"]
+    MARIETTA --> ODETTA["אודטה שוורץ"]
+
+    classDef male fill:#cfe8ff,stroke:#4a90e2,color:#111;
+    classDef female fill:#ffd6e7,stroke:#d66b9c,color:#111;
+
+    class OZI,ELIEZER,BARCO,LIVIO male;
+    class SARAH,HANNA,MARIETTA,ODETTA female;
