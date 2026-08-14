@@ -310,6 +310,33 @@
         .highlight {
             background-color: #fff3cd;
         }
+
+        .table-container {
+            max-height: 400px;
+            overflow-y: auto;
+            overflow-x: auto;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+        }
+
+        .table-container::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        .table-container::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            border-radius: 4px;
+        }
+
+        .table-container::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 4px;
+        }
+
+        .table-container::-webkit-scrollbar-thumb:hover {
+            background: #764ba2;
+        }
     </style>
 </head>
 <body>
@@ -921,7 +948,7 @@ flowchart TB
                 <button onclick="clearSearch()" style="background: #764ba2;">ניקוי | Clear</button>
             </div>
             <div class="search-results" id="searchResults"></div>
-            <div style="overflow-x: auto;">
+            <div class="table-container">
                 <table class="csv-table" id="csvTable">
                     <thead id="csvHead"></thead>
                     <tbody id="csvBody"></tbody>
@@ -973,7 +1000,6 @@ flowchart TB
             'name',
             'dadId',
             'momId',
-            'siblings',
             'brotherId1',
             'brotherId2',
             'brotherId3',
@@ -1011,17 +1037,6 @@ flowchart TB
             const tbody = document.getElementById('csvBody');
 
             const getDisplayValue = (row, header) => {
-                if (header === 'siblings') {
-                    const siblings = [
-                        row.brotherId1,
-                        row.brotherId2,
-                        row.brotherId3,
-                        row.sisterId1,
-                        row.sisterId2,
-                        row.sisterId3
-                    ].filter(Boolean);
-                    return siblings.join(', ');
-                }
                 return row[header] || '';
             };
             
