@@ -40,9 +40,8 @@ I want to create a static HTML page showcasing my ancestral family tree/s.
 
 
 
-The data described in these mermaid flowcharts should match the data in this CSV, please make sure is all makes sens (using an agent):
-[text](prd.md)
-
+The data described in these mermaid flowcharts should match the data in this CSV, please make sure is all makes sens - using multiple agents.
+[text](db.csv)
 
 
 let's also add a section for each subtree with a title and description, and include the corresponding mermaid diagram. The HTML page should have a clean layout with navigation links to each subtree section.
@@ -50,6 +49,7 @@ let's also add a section for each subtree with a title and description, and incl
 
 SO to repeat:
  * make sure the data in the mermaid flowcharts matches the data in the CSV
+   * If have any discrepancies, ask me and I'll clarify so you can update the flowcharts and CSV accordingly.
  * add a section for each subtree with a title and description and build hte HTML page with navigation links to each subtree section
  * inlcude the data csv in the HTML page for reference along with a serach box for searching the CSV data
  Ask me anythign or LMK if something doesnt make sens.
