@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>עץ המשפחה שלנו | Our Family Tree</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml">
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <style>
         * {
@@ -12,15 +14,24 @@
             box-sizing: border-box;
         }
 
+        html {
+            overflow-x: hidden;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: #333;
             line-height: 1.6;
+            overflow-x: hidden;
+            width: 100%;
+            display: flex;
+            justify-content: center;
         }
 
         .container {
             max-width: 1400px;
+            width: min(1400px, 100%);
             margin: 0 auto;
             padding: 20px;
         }
@@ -250,8 +261,20 @@
         }
 
         @media (max-width: 768px) {
+            .container {
+                padding: 12px;
+            }
+
             header h1 {
                 font-size: 1.8em;
+            }
+
+            header,
+            .nav-container,
+            .subtree-section,
+            .csv-section {
+                margin-left: auto;
+                margin-right: auto;
             }
 
             nav {
@@ -264,6 +287,23 @@
 
             .subtree-section h2 {
                 font-size: 1.5em;
+            }
+
+            .search-box {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                align-items: stretch;
+            }
+
+            .search-box input {
+                grid-column: 1 / -1;
+                min-width: 0;
+            }
+
+            .search-box button {
+                width: 100%;
+                padding: 12px;
             }
         }
 
@@ -378,8 +418,6 @@ flowchart LR
                 <br>
                 Historical records also identify Moshe Felix as an inn owner, and an 1895 marriage record preserves a Hebrew signature by Isiah-Leib Aaron.
             </p> 
-                Marietta married David (Barco) Schwartz, and they had Livio and Odetta Schwartz.
-            </p>
             <div class="mermaid-container">
                 <div class="mermaid">
 flowchart TB
@@ -487,8 +525,6 @@ flowchart TB
 
     class E,B,LIVIO,MW,Z,YITZHAK,MOTI,HERSHKO,DAVID_W,SAMUEL_W,DAVID_M,EHUD_P_T1,JEAN_G_T1,DANIEL_G_T1,MILKA male;
     class H,LIZ,MAR,S,T,CL,ODETTA,DIDONA,ROSA,RINA,PERLA,ANITA_F,TANYA_C,DANA_P_T1,ANN_G_T1 female;
-                </div>
-            </div>
                 </div>
             </div>
         </div>
