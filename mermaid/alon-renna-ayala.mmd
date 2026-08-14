@@ -16,10 +16,12 @@ flowchart TB
     SHM --> TAM["תמר אלון"]
     SHM --> HIL["הלל אלון"]
 
-    TAM --- AVT["אביטל"]
-    HIL --- AVT
+    AVT["אביטל"] --- MAYA["מאיה"]
 
-    AVT --- MAYA["מאיה"]
+    AVT --> TAM
+    AVT --> HIL
+    MAYA --> TAM
+    MAYA --> HIL
 
     AVT --> RON["רון"]
 

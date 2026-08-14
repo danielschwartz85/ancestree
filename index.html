@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>עץ המשפחה שלנו | Our Family Tree</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: white;
+            padding: 40px 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            color: #666;
+        }
+
+        .nav-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: static;
+            max-height: 50vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-container h2 {
+            margin-bottom: 15px;
+            color: #667eea;
+            font-size: 1.2em;
+            flex-shrink: 0;
+        }
+
+        nav {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        nav::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        nav::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            border-radius: 3px;
+        }
+
+        nav::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 3px;
+        }
+
+        nav::-webkit-scrollbar-thumb:hover {
+            background: #764ba2;
+        }
+
+        nav a {
+            display: block;
+            padding: 10px 15px;
+            background: #f0f0f0;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .subtree-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            scroll-margin-top: 100px;
+        }
+
+        .subtree-section h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .subtree-section .description {
+            color: #666;
+            font-size: 1.05em;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .mermaid-container {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            border: 1px solid #e0e0e0;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+
+        .mermaid svg a,
+        .mermaid .node.clickable {
+            cursor: pointer !important;
+        }
+
+        .csv-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .csv-section h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .search-box button {
+            padding: 12px 25px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .search-box button:hover {
+            background: #764ba2;
+        }
+
+        .csv-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 0.95em;
+        }
+
+        .csv-table thead {
+            background: #f0f0f0;
+            position: sticky;
+            top: 0;
+        }
+
+        .csv-table th {
+            padding: 12px;
+            text-align: right;
+            color: #667eea;
+            font-weight: 600;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .csv-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .csv-table tr:hover {
+            background: #f9f9f9;
+        }
+
+        .csv-table tr.hidden {
+            display: none;
+        }
+
+        .search-results {
+            color: #667eea;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: white;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            nav {
+                grid-template-columns: 1fr;
+            }
+
+            .subtree-section {
+                padding: 20px;
+            }
+
+            .subtree-section h2 {
+                font-size: 1.5em;
+            }
+        }
+
+        .highlight {
+            background-color: #fff3cd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌳 עץ המשפחה שלנו</h1>
+            <h1>Our Family Tree</h1>
+            <p>משפחות שוורץ, פלוטניק, אחימן ועוד | Schwartz, Plotnic, Achiman and more</p>
+        </header>
+
+        <div class="nav-container">
+            <h2>📍 תפריט ניווט | Navigation Menu</h2>
+            <nav>
+                <a href="#tree-overview">מפת-על | Overview</a>
+                <a href="#tree-0">0. פליקס</a>
+                <a href="#tree-1">1. שוורץ \ וינגרטן</a>
+                <a href="#tree-2">2. שוורץ \ חונה \ דנין</a>
+                <a href="#tree-3">3. לוי \ וישן</a>
+                <a href="#tree-5">4. פלוטניק עקרי</a>
+                <a href="#tree-7">5. אחימן \ בר לוי</a>
+                <a href="#tree-8">6. משפחת שמואל אלון / עומר ברק</a>
+                <a href="#tree-9">7. לביא בארי שירה גיל אורי הלל ותמר</a>
+                <a href="#csv-data">📊 נתונים | CSV Data</a>
+            </nav>
+        </div>
+
+        <!-- Overview Map -->
+        <div class="subtree-section" id="tree-overview">
+            <h2>מפת-על | Family Overview Map</h2>
+            <p class="description">
+                דיאגרמת-על פשוטה שמחברת בין כל הענפים המרכזיים דרך דמויות הגשר, בלי להעמיס את כל הפרטים.
+                <br>
+                A simple high-level map connecting all major branches through bridge people, without showing every individual detail.
+            </p>
+            <div class="mermaid-container">
+                <div class="mermaid">
+flowchart LR
+    T0["0. פליקס"]
+    T1["1. שוורץ \\\ וינגרטן"]
+    T2["2. שוורץ \\\ חונה \\\ דנין"]
+    T3["3. לוי \\\ וישן"]
+    T4["4. פלוטניק עקרי"]
+    T5["5. אחימן \\\ בר לוי"]
+    T6["6. משפחת שמואל אלון \\\ עומר ברק"]
+    T7["7. מפת הדור הצעיר"]
+
+    LIVIO["ליביו שוורץ"]
+    ODETTA["אודטה שוורץ"]
+    ILANA["אילנה שוורץ"]
+    YAARA["יערה אחימן"]
+    RENANA["רננה אחימן"]
+    AYALA["איילה אחימן"]
+
+    T0 -. ממשיך אל .-> T1
+    T1 --> LIVIO
+    T1 --> ODETTA
+    T1 --> T2
+
+    T3 --> ILANA
+    ILANA --> T2
+
+    T4 --> T2
+
+    T5 --> YAARA
+    T5 --> RENANA
+    T5 --> AYALA
+
+    RENANA --> T6
+    AYALA --> T6
+
+    YAARA --> T7
+    T2 --> T7
+    T6 --> T7
+
+    classDef branch fill:#eaf3ff,stroke:#4a90e2,color:#111,stroke-width:2px;
+    classDef bridge fill:#fff2b2,stroke:#c9a900,color:#111,stroke-width:2px;
+
+    click T0 jumpToTree "מעבר לדיאגרמה 0"
+    click T1 jumpToTree "מעבר לדיאגרמה 1"
+    click T2 jumpToTree "מעבר לדיאגרמה 2"
+    click T3 jumpToTree "מעבר לדיאגרמה 3"
+    click T4 jumpToTree "מעבר לדיאגרמה 4"
+    click T5 jumpToTree "מעבר לדיאגרמה 5"
+    click T6 jumpToTree "מעבר לדיאגרמה 6"
+    click T7 jumpToTree "מעבר לדיאגרמה 7"
+
+    class T0,T1,T2,T3,T4,T5,T6,T7 branch;
+    class LIVIO,ODETTA,ILANA,YAARA,RENANA,AYALA bridge;
+                </div>
+            </div>
+        </div>
+
+        <!-- Tree 0: Felix -->
+        <div class="subtree-section" id="tree-0">
+            <h2>0. פליקס | Felix</h2>
+            <p class="description">
+                משפחת פליקס מתחילה עם ישעיה-לייב אהרון שנשא את מרים, והולידו את משה פליקס (1895). משה נשא את רוזה וראו את אוסיאס פליקס (יליד 1896 ביאשי) ואת זאן פליקס.
+                <br>
+                אוסיאס נשא את שרה דבורה סופיה סלומון וראו שני ילדים: מריאטה וזאן. זאן נהרג בפוגרום יאשי בחודש יוני 1941. מריאטה נשאה את דב (ברקו) שוורץ והולידה את ליביו ואודטה שוורץ.
+                <br>
+                לפי הרשומות ההיסטוריות שנמצאו, משה פליקס הוגדר כבעל פונדק דרכים, ובמסמך נישואין מ-1895 מופיעה חתימתו בעברית של ישעיה-לייב אהרון.
+                <br>
+                The Felix family begins with Isiah-Leib Aaron and Miriam, who had Moshe Felix (1895). Moshe married Roza and had Osias Felix (born 1896 in Iasi) and Jean Felix.
+                <br>
+                Osias married Sarah Deborah Sophia Salomon and had two children: Marietta and Jean. Jean was killed in the Iasi pogrom in June 1941. Marietta married David (Barco) Schwartz and had Livio and Odetta Schwartz.
+                <br>
+                Historical records also identify Moshe Felix as an inn owner, and an 1895 marriage record preserves a Hebrew signature by Isiah-Leib Aaron.
+            </p> 
+                Marietta married David (Barco) Schwartz, and they had Livio and Odetta Schwartz.
+            </p>
+            <div class="mermaid-container">
+                <div class="mermaid">
+flowchart TB
+
+    OSI_OLD["אוסיאס פליקס (קדום)"] --- MIR["מרים"]
+    OSI_OLD --> MOS["משה פליקס"]
+
+    ISH["ישעיה-לייב אהרון"] --- MIRLE["מירלה"]
+    ISH --> ROZ["רוזה"]
+
+    MOS --- ROZ
+    MOS --> OSI["אוסיאס פליקס<br/>(1896)"]
+    ROZ --> OSI
+
+    OSI --- SARAH["שרה דבורה (סופיה) סלומון"]
+    OSI --> JEAN["זאן פליקס<br/>(נהרג בפוגרום יאשי 1941)"]
+    OSI --> MARIETTA["מריאטה"]
+    SARAH --> JEAN
+    SARAH --> MARIETTA
+
+    MARIETTA --- BARCO["דב (ברקו) שוורץ"]
+    MARIETTA --> LIVIO["ליביו שוורץ"]
+    MARIETTA --> ODETTA["אודטה שוורץ"]
+
+    classDef male fill:#cfe8ff,stroke:#4a90e2,color:#111;
+    classDef female fill:#ffd6e7,stroke:#d66b9c,color:#111;
+    classDef deceased fill:#e8b4b8,stroke:#8b4a4a,color:#111;
+
+    class OSI_OLD,MOS,OSI,BARCO,LIVIO male;
+    class MIR,MIRLE,ROZ,SARAH,MARIETTA,ODETTA female;
+    class JEAN deceased;
+                </div>
+            </div>
+        </div>
+
+        <!-- Tree 1: Schwartz -->
+        <div class="subtree-section" id="tree-1">
+            <h2>1. שוורץ \ וינגרטן | Schwartz \ Weingarten</h2>
+            <p class="description">
+                אליאזר (לייזר) שוורץ נשא את חנה וינגרטן, ומהצד של חנה מופיע גם אחיה מרקו וינגרטן ואחותו רוזה. לפי המסורת המשפחתית, צילי (אחותו של ברקו) הושאה למרקו, ונולדה להם בת אחת: דידונה.
+                <br>
+                דידונה נישאה ליצחק, ומהם נולדו רינה (אחות בית חולים בחיפה) ומוטי (שלפי הסיפורים חי באנגליה). לצד זה נשמרו גם זיכרונות משפחתיים קשים על אשפוז כפוי שעברה דידונה בתקופה שבה נהגו כך בקלות רבה יותר.
+                <br>
+                האחות סורוקה (שרה) נישאה להרשקו, ונולדה להם פרלה (פויקה). פרלה ודוד וינברג הקימו משפחה עם שלושה ילדים: אניטה פרידמן, שרון וסמואל. האחות קלרה נישאה לדוד מאייר, ומהם נולדה טניה, שממנה נמשך הקו לדנה פלד-יעקובי ולמשפחת גואטה (אן ודניאל).
+                <br>
+                הענף של ליזה ומנדל חונה כולל את מילקה ואת צביקה חונה. במקביל, ברקו ומריאטה הקימו את הענף של ליביו ואודטה שוורץ, שמקשר בין בית שוורץ לבית פליקס ולדורות ההמשך.
+                <br>
+                Eliezer (Laser) Schwartz married Hannah Weingarten. On Hannah's side, this branch also includes her brother Marco Weingarten and sister Rosa. Family oral history says Tzili married Marco, and they had one daughter, Didona.
+                <br>
+                Didona married Yitzhak and had Rina and Moti. Soroka (Sarah) married Hershko and had Perla (Foika), whose line with David Weinberg includes Anita Friedman, Sharon, and Samuel. Clara married David Meier and had Tanya, whose descendants include Dana Peled-Yaakobi and the Guetta line (Ann and Daniel).
+                <br>
+                Liza and Mendel Hona's line includes Milka and Tzvika Hona, while Barco and Marietta's line includes Livio and Odetta Schwartz, bridging the Schwartz and Felix branches.
+            </p>
+            <div class="mermaid-container">
+                <div class="mermaid">
+flowchart TB
+    E["אליאזר (לייזר) שוורץ"] --- H["חנה וינגרטן"]
+    MW["מרקו וינגרטן (אח של חנה)"]
+    ROSA["רוזה וינגרטן (אחות חנה)"]
+
+    E --> B["דב (ברקו)"]
+    E --> LIZ["ליזה"]
+    LIZ --> Z["צביקה חונה"]
+    LIZ --> MILKA["מילקה"]
+    E --> S["סורוקה (שרה)"]
+    S --- HERSHKO["הרשקו"]
+    S --> PERLA["פרלה (פויקה)"]
+    HERSHKO --> PERLA
+    PERLA --- DAVID_W["דוד וינברג"]
+    PERLA --> SHARON_W["שרון"]
+    PERLA --> SAMUEL_W["סמואל"]
+    DAVID_W --> SHARON_W
+    DAVID_W --> SAMUEL_W
+    PERLA --> ANITA_F["אניטה פרידמן"]
+    DAVID_W --> ANITA_F
+    E --> T["צילי"]
+    E --> CL["קלרה"]
+    CL --- DAVID_M["דוד מאייר"]
+    CL --> TANYA_C["טניה"]
+    DAVID_M --> TANYA_C
+    TANYA_C --- EHUD_P_T1["אהוד פלד"]
+    TANYA_C --> DANA_P_T1["דנה פלד"]
+    EHUD_P_T1 --> DANA_P_T1
+    TANYA_C --- JEAN_G_T1["ג'אן גואטה"]
+    TANYA_C --> ANN_G_T1["אן גואטה"]
+    TANYA_C --> DANIEL_G_T1["דניאל גואטה"]
+    JEAN_G_T1 --> ANN_G_T1
+    JEAN_G_T1 --> DANIEL_G_T1
+
+    MW --- T
+
+    B --- MAR["מריאטה"]
+    B --> LIVIO["ליביו שוורץ"]
+    B --> ODETTA["אודטה שוורץ"]
+
+    MW --> DIDONA["דידונה"]
+    DIDONA --- YITZHAK["יצחק"]
+    DIDONA --> RINA["רינה"]
+    DIDONA --> MOTI["מוטי"]
+    YITZHAK --> RINA
+    YITZHAK --> MOTI
+
+    classDef male fill:#cfe8ff,stroke:#4a90e2,color:#111;
+    classDef female fill:#ffd6e7,stroke:#d66b9c,color:#111;
+
+    class E,B,LIVIO,MW,Z,YITZHAK,MOTI,HERSHKO,DAVID_W,SAMUEL_W,DAVID_M,EHUD_P_T1,JEAN_G_T1,DANIEL_G_T1,MILKA male;
+    class H,LIZ,MAR,S,T,CL,ODETTA,DIDONA,ROSA,RINA,PERLA,ANITA_F,TANYA_C,DANA_P_T1,ANN_G_T1 female;
+                </div>
+            </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tree 2: Schwartz Hona Danin -->
+        <div class="subtree-section" id="tree-2">
+            <h2>2. שוורץ \ חונה \ דנין | Schwartz \ Hona \ Danin</h2>
+            <p class="description">
+                דיאגרמה ממוקדת בצאצאי צביקה חונה, צאצאי ליביו שוורץ וצאצאי אודטה שוורץ, כולל אבה, אילנה שוורץ, מלי, משה, מאיר, דניאל ויערה עם לביא ובארי, רווית עם עמנואל ואורי וילדיה אוליבר ורומי, ודנה (בת אודטה) עם בן זוגה וילדיה.
+                <br>
+                בהקשר הרחב של הענף, זהו דור ההמשך של הקווים שהופיעו בענף ברקו ואחיותיו (צילי, סורוקה, קלרה וליזה), עם הסתעפויות בישראל, אנגליה, קנדה, מיאמי וניו יורק לפי זיכרונות המשפחה.
+                <br>
+                זהו הענף שמחבר בין הדורות הוותיקים שאותרו ברשומות מרומניה לבין הדורות החדשים במשפחה כיום.
+                <br>
+                This diagram focuses on the descendants of Tzvika Hona, Livio Schwartz, and Odetta Schwartz, including Ava, Ilana Schwartz, Meli, Moshe, Meir, Daniel and Yaara with Lavi and Beeri, Ravit with Emanuel and Uri and her children Oliver and Romi, and Dana (Odetta's daughter) with her spouse and children.
+                <br>
+                In broader context, this is the continuation generation of the Barco-siblings lines (Tzili, Soroka, Clara, and Liza), with family branches remembered across Israel, England, Canada, Miami, and New York.
+                <br>
+                It is the branch that bridges older Romanian historical records with the contemporary generations of the family.
+            </p>
+            <div class="mermaid-container">
+                <div class="mermaid">
+flowchart TB
+    B["דב (ברקו) שוורץ"] --- MAR["מריאטה"]
+    B --> LIVIO["ליביו שוורץ"]
+    B --> ODETTA["אודטה שוורץ"]
+    Z["צביקה חונה"]
+
+    Z --- A["אבה"]
+    Z --> I["איתי"]
+    Z --> G["גיא"]
+    Z --> N["ניר"]
+    Z --> Y["יעל"]
+
+    LIVIO --- MELI["מלי"]
+    LIVIO --- ILANA["אילנה שוורץ"]
+    LIVIO --> MOSHE["משה"]
+    LIVIO --> MEIR["מאיר"]
+    LIVIO --> DANIEL_S["דניאל שוורץ"]
+    LIVIO --> RAVIT_S["רווית שוורץ"]
+    MELI --> MOSHE
+    MELI --> MEIR
+    ILANA --> DANIEL_S
+    ILANA --> RAVIT_S
+
+    DANIEL_S --- YAARA["יערה"]
+    DANIEL_S --> LAVI["לביא"]
+    DANIEL_S --> BEERI["בארי"]
+    YAARA --> LAVI
+    YAARA --> BEERI
+
+    RAVIT_S --- EMANUEL["עמנואל"]
+    RAVIT_S --- URI_R["אורי"]
+    RAVIT_S --> OLIVER["אוליבר"]
+    RAVIT_S --> ROMI["רומי"]
+    EMANUEL --> OLIVER
+    URI_R --> ROMI
+
+    ODETTA --- ITZIK["איציק"]
+    ODETTA --> DANA["דנה"]
+    ODETTA --> ALON["אלון"]
+    DANA --- MIKE["מייק זיקרי"]
+    DANA --> NEIL["ניל"]
+    DANA --> DANIEL_D["דניאל"]
+    DANA --> ALEX["אלכס"]
+    MIKE --> NEIL
+    MIKE --> DANIEL_D
+    MIKE --> ALEX
+
+    classDef male fill:#cfe8ff,stroke:#4a90e2,color:#111;
+    classDef female fill:#ffd6e7,stroke:#d66b9c,color:#111;
+
+    class B,LIVIO,Z,ITZIK,I,G,N,MOSHE,MEIR,DANIEL_S,LAVI,BEERI,EMANUEL,URI_R,OLIVER,MIKE,NEIL,DANIEL_D male;
+    class MAR,ODETTA,A,Y,MELI,ILANA,RAVIT_S,DANA,ALON,YAARA,ROMI,ALEX female;
+                </div>
+            </div>
+        </div>
+
+        <!-- Tree 3: Levi Weisshan -->
+        <div class="subtree-section" id="tree-3">
+            <h2>3. לוי \ וישן | Levi \ Weisshan</h2>
+            <p class="description">
+                ניסים (מיקי) לוי נשא את רחל וישן והיה אב לאילנה שוורץ. כאן נוספו גם ההורים הידועים של רחל וישן: לזר ומלכה וישן.
+                <br>
+                בהצלבות המחקר נמצאו גם קרובי משפחה רחוקים מענף זה, כולל התאמות משפחתיות שהובילו לקשר עם קרובה מאוסטרליה.
+                <br>
+                Nissim (Miki) Levi married Rachel Weisshan and was father to Ilana Schwartz. This section now also includes Rachel Weisshan's known parents: Lazar and Malka Weisshan.
+                <br>
+                Cross-record research also surfaced extended relatives from this line, including family matches that led to contact with a relative in Australia.
+            </p>
+            <div class="mermaid-container">
+                <div class="mermaid">
+flowchart TB
+    M["משולם"] --> N["ניסים (מיקי) לוי"]
+    M --> B["בלה משולם"]
+
+    LZ["לזר וישן"] --- MKW["מלכה וישן"]
+    LZ --> R["רחל וישן"]
+    MKW --> R
+
+    DOLFI["דולפי וישן (אח של לזר)"] --- LIZW["ליז וישן"]
+    DOLFI --> JP["ז'אן פייר"]
+    DOLFI --> DOLFI_SON["בן נוסף של דולפי"]
+    LIZW --> JP
+    LIZW --> DOLFI_SON
+
+    JP --> JP_SON1["בן של ז'אן פייר"]
+    JP --> JP_SON2["בן של ז'אן פייר"]
+
+    N --- R["רחל וישן"]
+    N --> I["אילנה שוורץ"]
+
+    B --> S["שמחה (סופקה)"]
+
+    S --- SH["שמוליק"]
+
+    S --> MOR["מורן"]
+    S --> YAN["יניב"]
+    S --> AS["אסי"]
+
+    classDef male fill:#cfe8ff,stroke:#4a90e2,color:#111;
+    classDef female fill:#ffd6e7,stroke:#d66b9c,color:#111;
+
+    class M,N,SH,YAN,AS,LZ,DOLFI,JP,DOLFI_SON,JP_SON1,JP_SON2 male;
+    class B,R,I,S,MOR,MKW,LIZW female;
+                </div>
+            </div>
+        </div>
+
+        <!-- Tree 5: Plotnic Akri -->
+        <div class="subtree-section" id="tree-5">
+            <h2>4. פלוטניק עקרי | Plotnic Akri</h2>
+            <p class="description">
+                מלי פלוטניק היא בתו של משה פלוטניק וזוגו של ליביו שוורץ. משפחתה, כולל אודי, בקי, ונועה, מהווה חלק חשוב מהענף הפלוטניק של עצנו.
+                <br>
+                Mali Plotnic is the daughter of Moshe Plotnic and wife of Livio Schwartz. Her family, including Udi, Becky, and Noa, form an important part of the Plotnic branch of our tree.
+            </p>
+            <div class="mermaid-container">
+                <div class="mermaid">
+flowchart TB
+    SH["שמעון עקרי"] --- NANA["נעימה (ננה)"]
+
+    SH --> YOR["יורם"]
+    SH --> SAS["ששון"]
+    SH --> YAK["יעקב"]
+    SH --> AVN["אבנר"]
+    SH --> TK["תקווה פלוטניק"]
+
+    YAK --- YAFA_YAK["יפה"]
+    YAK --> SIGI_YAK["סיגי"]
+    YAFA_YAK --> SIGI_YAK
+    SIGI_YAK --> OMRI_SIGI["עמרי"]
+    AVN --- SARAH_AVN["שרה"]
+
+    SAS --- BETTY_SAS["בטי גונן"]
+    SAS --> YOR_SAS["יורם"]
+    SAS --> ANAT_SAS["ענת"]
+    SAS --> NAOMI_SAS["נעמי"]
+    BETTY_SAS --> YOR_SAS
+    BETTY_SAS --> ANAT_SAS
+    BETTY_SAS --> NAOMI_SAS
+
+    NANA --> YOR
+    NANA --> SAS
+    NANA --> YAK
+    NANA --> AVN
+    NANA --> TK
+
+    YAL["יהודה אריה לייב"] --- BEL["בלה"]
+    YAL --> MOS["משה פלוטניק (מוסא)"]
+
+    MOS --- TK
+
+    MOS --> MEL["מלי פלוטניק"]
+    MOS --> UDI["אודי פלוטניק"]
+    MOS --> BECKY["בקי פלוטניק"]
+    MOS --> NOA["נועה פלוטניק"]
+
+    UDI --- DEBI["דבי"]
+
+    BECKY --- TUVIA["טוביה"]
+    BECKY --> CHEN["חן"]
+
+    LIV["ליביו שוורץ"] --- MEL
+    LIV --> MOSH["משה שוורץ"]
+    LIV --> MEIR["מאיר שוורץ"]
+
+    classDef male fill:#cfe8ff,stroke:#4a90e2,color:#111;
+    classDef female fill:#ffd6e7,stroke:#d66b9c,color:#111;
+
+    class YAL,MOS,SH,YOR,SAS,YAK,AVN,UDI,TUVIA,CHEN,LIV,MOSH,MEIR,YOR_SAS,OMRI_SIGI male;
+    class BEL,NANA,TK,MEL,BECKY,NOA,DEBI,SARAH_AVN,YAFA_YAK,BETTY_SAS,ANAT_SAS,NAOMI_SAS,SIGI_YAK female;
+                </div>
+            </div>
+        </div>
+
+        <!-- Tree 7: Yaara Achiman -->
+        <div class="subtree-section" id="tree-7">
+            <h2>5. אחימן \ בר לוי | Achiman / Bar Levi</h2>
+            <p class="description">
+                יערה אחימן היא בתו של רמי אחירם ויעל בר לוי. משפחתה, כולל בנים לביא וברי שלה, מהווה סוף מעניין בדרך משפחתית מסובכת.
+                <br>
+                Yaara Achiman is the daughter of Rami Achiram and Yael Bar Levi. Her family, including her sons Lavi and Beri, form an interesting end to a complex family journey.
+            </p>
+            <div class="mermaid-container">
+                <div class="mermaid">
+flowchart TB
+    SB["שמואל בר לוי"] --- YF["יפה"]
+
+    SB --> YAEL["יעל בר לוי"]
+    SB --> RU["רוחלה"]
+    SB --> NET["נטע"]
+
+    NET --- HG["חן גוטמן"]
+    NET --> YIF["יפעת"]
+    NET --> DOR["דור"]
+    NET --> SHN["שני"]
+
+    RU --> NA["נעמה"]
+    RU --> DAV["דוד"]
+    RU --> R1["בת נוספת"]
+    RU --> R2["בת נוספת"]
+
+    HN["חנוך חמלניק"] --- YEH["יהודית נוייגרשל"]
+
+    HN --> RAMI["רמי אחירם"]
+    HN --> YIN["ינון אחירם"]
+
+    RAMI --- YAEL
+    RAMI --> YAARA["יערה אחימן"]
+
+    YIN --- ADA["אדה"]
+
+    YIN --> ELI["אלישע"]
+    YIN --> AMI["אמיתי"]
+    YIN --> EIN["עינת"]
+    YIN --> MER["מירב"]
+    YIN --> URI["אורי"]
+    YIN --> AVI["אבישי"]
+    YIN --> ELH["אלחנן"]
+    YIN --> EIT["איתן ישראל"]
+
+    EIN --> ELY["אלייה"]
+    EIN --> YON["יונתן"]
+
+    YAARA --> LAV["לביא"]
+    YAARA --> BER["בארי"]
+
+    classDef male fill:#cfe8ff,stroke:#4a90e2,color:#111;
+    classDef female fill:#ffd6e7,stroke:#d66b9c,color:#111;
+
+    class SB,HG,HN,RAMI,YIN,ELI,AMI,URI,AVI,ELH,EIT,YON,LAV,BER,DOR,DAV male;
+    class YF,YAEL,RU,NET,YIF,SHN,NA,YEH,YAARA,ADA,EIN,MER,ELY,R1,R2 female;
+                </div>
+            </div>
+        </div>
+
+        <!-- Tree 8: Alon Renna Ayala -->
+        <div class="subtree-section" id="tree-8">
+            <h2>6. משפחת שמואל אלון / עומר ברק | Shmuel Alon / Omer Barak Family</h2>
+            <p class="description">
+                רננה אחימן נשאה את שמואל (שמוליק) אלון, והם הנושאים של תמר והלל.
+                איילה אחימן הולידה ילדים לעומר ברק: גיל, שירה, ואורי.
+                <br>
+                Renna Achiman married Shmuel (Shmulik) Alon, and they were the parents of Tamar and Hillel (later adopted by Avital and Maya).
+                Ayala Achiman had children with Omer Barak: Gil, Shira, and Uri.
+            </p>
+            <div class="mermaid-container">
+                <div class="mermaid">
+flowchart TB
+    AB["אברהם ביטנסקי"] --- SHL["שלווה"]
+
+    AB --> SHM["שמואל (שמוליק) אלון"]
+
+    SHM --> LEA["לאה"]
+    SHM --> NAF["נפתלי"]
+    SHM --> ARY["אריה"]
+    SHM --> SIS["אחות נוספת"]
+    SHM --> SIS2["אחות נוספת"]
+    SHM --> SIS3["אחות נוספת"]
+    SHM --> SIS4["אחות נוספת"]
+
+    SHM --- REN["רננה אחימן"]
+
+    SHM --> TAM["תמר אלון"]
+    SHM --> HIL["הלל אלון"]
+
+    AVT["אביטל"] --- MAYA["מאיה"]
+
+    AVT --> TAM
+    AVT --> HIL
+    MAYA --> TAM
+    MAYA --> HIL
+
+    AVT --> RON["רון"]
+
+    MAYA --- TZ["צדוק"]
+    MAYA --> URI["אורי"]
+    MAYA --> ABI["אבייתר"]
+
+    BN["בני קרקובר"] --- IR["אירית קרקובר"]
+
+    BN --> OMER["עומר ברק"]
+    BN --> RA["רע"]
+    BN --> MIT["מיטב"]
+    BN --> OTHER["אח/אחות נוסף/ת"]
+
+    OMER --- AY["איילה אחימן"]
+
+    OMER --> GIL["גיל"]
+    OMER --> SHIRA["שירה"]
+    OMER --> URI2["אורי"]
+
+    classDef male fill:#cfe8ff,stroke:#4a90e2,color:#111;
+    classDef female fill:#ffd6e7,stroke:#d66b9c,color:#111;
+
+    class AB,SHM,NAF,ARY,OMER,RA,TZ,URI,ABI,RON,GIL,URI2 male;
+    class SHL,LEA,SIS,SIS2,SIS3,SIS4,REN,TAM,HIL,AVT,MAYA,IR,MIT,AY,SHIRA,OTHER female;
+                </div>
+            </div>
+        </div>
+
+        <!-- Tree 9: Schwartz Plotnic Achiman (Main Tree) -->
+        <div class="subtree-section" id="tree-9">
+            <h2>7. לביא בארי שירה גיל אורי הלל ותמר | Lavi, Bari, Shira, Gil, Uri, Hillel & Tamar</h2>
+            <p class="description">
+                זה העץ הרئיסי המקשר את כל הענפים יחד. לביא וברי הם בני יערה אחימן, ואילו גיל, שירה, ואורי הם ילדי איילה אחימן.
+                הלל ותמר הם בני שמוליק וררננה שאומצו על ידי אביטל ומאיה. לביא שוורץ, בנו של דניאל ויערה, מחבר את הדור החדש למורשת המשפחה הקדומה.
+                <br>
+                This is the main tree connecting all branches together. Lavi and Beri are the sons of Yaara Achiman, while Gil, Shira, and Uri are the children of Ayala Achiman.
+                Hillel and Tamar are the children of Shmoolik and Renna who were adopted by Avital and Maya. Lavi Schwartz, son of Daniel and Yaara, connects the new generation to the ancient family heritage.
+            </p>
+            <div class="mermaid-container">
+                <div class="mermaid">
+flowchart TB
+
+    LIVIO["ליביו שוורץ"] --- MALI["מלי פלוטניק"]
+    LIVIO --- ILANA["אילנה"]
+
+    MALI --> MOSHE["משה שוורץ"]
+    MALI --> MEIR["מאיר שוורץ"]
+
+    ILANA --> DANIEL["דניאל שוורץ"]
+    ILANA --> RAVIT["רווית"]
+
+    DANIEL --- YAARA["יערה אחימן"]
+    DANIEL --> LAVI["לביא שוורץ"]
+    DANIEL --> BEERI["בארי שוורץ"]
+
+    RAVIT --- URI_R["אורי"]
+    RAVIT --> ROMI["רומי"]
+
+    RAVIT --- EMANUEL["עמנואל"]
+    RAVIT --> OLIVER["אוליבר"]
+
+    RAMI["רמי אחירם"] --- YAEL["יעל בר לוי"]
+    RAMI --> YAARA
+    RAMI --> AYALA["איילה"]
+    RAMI --> RENANA["רננה"]
+
+    RENANA --- SHMULIK["שמוליק אלון"]
+    RENANA --> TAMAR["תמר"]
+    RENANA --> HILLEL["הלל"]
+
+    AYALA --- OMER["עומר"]
+    AYALA --> GIL["גיל"]
+    AYALA --> SHIRA["שירה"]
+    AYALA --> URI_A["אורי"]
+
+    classDef male fill:#cfe8ff,stroke:#4a90e2,color:#111;
+    classDef female fill:#ffd6e7,stroke:#d66b9c,color:#111;
+    classDef focus fill:#fff2b2,stroke:#c9a900,stroke-width:3px,color:#111;
+
+    class LIVIO,MOSHE,MEIR,DANIEL,URI_R,EMANUEL,OLIVER,RAMI,SHMULIK,OMER,GIL,URI_A male;
+    class MALI,ILANA,RAVIT,YAARA,YAEL,AYALA,RENANA,TAMAR,HILLEL,SHIRA female;
+    class LAVI,BEERI focus;
+                </div>
+            </div>
+        </div>
+
+        <!-- CSV Data Section -->
+        <div class="csv-section" id="csv-data">
+            <h2>📊 נתוני המשפחה | Family Data</h2>
+            <p style="margin-bottom: 20px; color: #666;">
+                חיפוש בבסיס הנתונים של משפחתנו | Search through our family database
+            </p>
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    id="csvSearch" 
+                    placeholder="חיפוש לפי שם, ID או כל שדה אחר... | Search by name, ID, or any field..."
+                >
+                <button onclick="searchCSV()">חיפוש | Search</button>
+                <button onclick="clearSearch()" style="background: #764ba2;">ניקוי | Clear</button>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+            <div style="overflow-x: auto;">
+                <table class="csv-table" id="csvTable">
+                    <thead id="csvHead"></thead>
+                    <tbody id="csvBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2026 משפחת שוורץ | Schwartz Family | Created with ❤️</p>
+        </footer>
+    </div>
+
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({ startOnLoad: true, theme: 'default', securityLevel: 'loose' });
+
+        // Click handler for overview-map nodes.
+        window.jumpToTree = function(nodeId) {
+            const mapping = {
+                T0: '#tree-0',
+                T1: '#tree-1',
+                T2: '#tree-2',
+                T3: '#tree-3',
+                T4: '#tree-5',
+                T5: '#tree-7',
+                T6: '#tree-8',
+                T7: '#tree-9'
+            };
+
+            const target = mapping[nodeId];
+            if (!target) {
+                return;
+            }
+
+            const element = document.querySelector(target);
+            if (!element) {
+                return;
+            }
+
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            history.replaceState(null, '', target);
+        };
+
+        // Load CSV data
+        let csvData = [];
+        let csvHeaders = [];
+        const displayHeaders = [
+            'id',
+            'name',
+            'dadId',
+            'momId',
+            'siblings',
+            'brotherId1',
+            'brotherId2',
+            'brotherId3',
+            'sisterId1',
+            'sisterId2',
+            'sisterId3'
+        ];
+
+        async function loadCSV() {
+            try {
+                const response = await fetch('db.csv');
+                const text = await response.text();
+                const lines = text.trim().split('\n');
+                
+                csvHeaders = lines[0].split(',');
+                csvData = lines.slice(1).map(line => {
+                    const values = line.split(',');
+                    const row = {};
+                    csvHeaders.forEach((header, index) => {
+                        row[header] = values[index] || '';
+                    });
+                    return row;
+                });
+
+                renderCSVTable(csvData);
+            } catch (error) {
+                console.error('Error loading CSV:', error);
+                document.getElementById('csvBody').innerHTML = 
+                    '<tr><td colspan="10" style="text-align: center;">שגיאה בטעינת הנתונים | Error loading data</td></tr>';
+            }
+        }
+
+        function renderCSVTable(data) {
+            const thead = document.getElementById('csvHead');
+            const tbody = document.getElementById('csvBody');
+
+            const getDisplayValue = (row, header) => {
+                if (header === 'siblings') {
+                    const siblings = [
+                        row.brotherId1,
+                        row.brotherId2,
+                        row.brotherId3,
+                        row.sisterId1,
+                        row.sisterId2,
+                        row.sisterId3
+                    ].filter(Boolean);
+                    return siblings.join(', ');
+                }
+                return row[header] || '';
+            };
+            
+            // Render headers
+            thead.innerHTML = '<tr>' + 
+                displayHeaders.map(h => `<th>${h}</th>`).join('') + 
+                '</tr>';
+            
+            // Render body
+            tbody.innerHTML = data.map(row => 
+                '<tr>' + 
+                displayHeaders.map(h => `<td>${getDisplayValue(row, h)}</td>`).join('') + 
+                '</tr>'
+            ).join('');
+        }
+
+        function searchCSV() {
+            const searchTerm = document.getElementById('csvSearch').value.toLowerCase().trim();
+            
+            if (!searchTerm) {
+                renderCSVTable(csvData);
+                document.getElementById('searchResults').textContent = '';
+                return;
+            }
+
+            const filtered = csvData.filter(row => 
+                Object.values(row).some(value => 
+                    value.toLowerCase().includes(searchTerm)
+                )
+            );
+
+            renderCSVTable(filtered);
+            
+            const resultCount = filtered.length;
+            document.getElementById('searchResults').textContent = 
+                `נמצאו ${resultCount} תוצאות | Found ${resultCount} results`;
+        }
+
+        function clearSearch() {
+            document.getElementById('csvSearch').value = '';
+            renderCSVTable(csvData);
+            document.getElementById('searchResults').textContent = '';
+        }
+
+        // Allow Enter key in search
+        document.getElementById('csvSearch').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                searchCSV();
+            }
+        });
+
+        // Load everything on page load
+        window.addEventListener('load', function() {
+            loadCSV();
+        });
+    </script>
+</body>
+</html>
