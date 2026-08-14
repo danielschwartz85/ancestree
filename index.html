@@ -358,7 +358,8 @@
                 <a href="#tree-5">4. פלוטניק עקרי</a>
                 <a href="#tree-7">5. אחימן \ בר לוי</a>
                 <a href="#tree-8">6. משפחת שמואל אלון / עומר ברק</a>
-                <a href="#tree-9">7. לביא בארי שירה גיל אורי הלל ותמר</a>
+                <a href="#tree-10">7. משפחת אורי ועמנואל</a>
+                <a href="#tree-9">8. לביא בארי שירה גיל אורי הלל ותמר</a>
                 <a href="#csv-data">📊 נתונים | CSV Data</a>
             </nav>
         </div>
@@ -874,9 +875,54 @@ flowchart TB
             </div>
         </div>
 
+        <!-- Tree 10: Uri & Emanuel -->
+        <div class="subtree-section" id="tree-10">
+            <h2>7. עצים של המשפחה של אורי (בעלה של רווית) ועמנואל | Uri & Emanuel Family Trees</h2>
+            <p class="description">
+                אזור זה מתמקד בשני ענפים נפרדים הקשורים לרווית: מצד אחד אורי וילדיו ג'וני ומיה, ומצד שני עמנואל ומשפחת המוצא שלו וכן בנו אוליבר מרווית.
+                <br>
+                This section focuses on two separate branches connected to Ravit: on one side Uri and his children Johnny and Mia, and on the other side Emanuel's family of origin and his son Oliver with Ravit.
+            </p>
+            <div class="mermaid-container">
+                <div class="mermaid">
+flowchart TB
+    RAVIT["רווית שוורץ"] --- URI["אורי"]
+    URI --- UM["אמא לא ידועה של ג'וני ומיה"]
+
+    URI --> JOHNNY["ג'וני"]
+    URI --> MIA["מיה"]
+    UM --> JOHNNY
+    UM --> MIA
+
+    RAVIT --> ROMI["רומי"]
+    URI --> ROMI
+
+    RAVIT --- EMANUEL["עמנואל"]
+    RAVIT --> OLIVER["אוליבר"]
+    EMANUEL --> OLIVER
+
+    OSCAR["אוסקר"] --- SARAH["שרה"]
+    OSCAR --> ELEANOR["אלינור"]
+    OSCAR --> EMANUEL
+    E_BRO["אח נוסף של עמנואל"]
+    SARAH --> ELEANOR
+    SARAH --> EMANUEL
+    SARAH --> E_BRO
+
+    classDef male fill:#cfe8ff,stroke:#4a90e2,color:#111;
+    classDef female fill:#ffd6e7,stroke:#d66b9c,color:#111;
+    classDef neutral fill:#f2f2f2,stroke:#999,color:#111;
+
+    class URI,EMANUEL,OSCAR,E_BRO,OLIVER,JOHNNY male;
+    class RAVIT,SARAH,ELEANOR,MIA,ROMI female;
+    class UM neutral;
+                </div>
+            </div>
+        </div>
+
         <!-- Tree 9: Schwartz Plotnic Achiman (Main Tree) -->
         <div class="subtree-section" id="tree-9">
-            <h2>7. לביא בארי שירה גיל אורי הלל ותמר | Lavi, Bari, Shira, Gil, Uri, Hillel & Tamar</h2>
+            <h2>8. לביא בארי שירה גיל אורי הלל ותמר | Lavi, Bari, Shira, Gil, Uri, Hillel & Tamar</h2>
             <p class="description">
                 זה העץ הרئיסי המקשר את כל הענפים יחד. לביא וברי הם בני יערה אחימן, ואילו גיל, שירה, ואורי הם ילדי איילה אחימן.
                 הלל ותמר הם בני שמוליק וררננה שאומצו על ידי אביטל ומאיה. לביא שוורץ, בנו של דניאל ויערה, מחבר את הדור החדש למורשת המשפחה הקדומה.
