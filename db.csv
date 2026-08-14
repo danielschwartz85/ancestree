@@ -83,8 +83,8 @@ odetta_schwartz,אודטה שוורץ,barco_schwartz,marietta_schwartz,,,,,,
 livio_schwartz,ליביו שוורץ,barco_schwartz,marietta_schwartz,,,,,,
 
 ilana_schwartz,אילנה שוורץ,nissim_levi,rachel_weisshan,,,,,,
-ravit_schwartz,רווית שוורץ,livio_schwartz,ilana_schwartz,,,,,,
-daniel_schwartz,דניאל שוורץ,livio_schwartz,ilana_schwartz,,,,,,,
+ravit_schwartz,רווית שוורץ,livio_schwartz,ilana_schwartz,daniel_schwartz,,,,
+daniel_schwartz,דניאל שוורץ,livio_schwartz,ilana_schwartz,,,,ravit_schwartz,,
 
 itzik,איציק,,,,,,,,
 dana,דנה,itzik,odetta_schwartz,,,,,,
