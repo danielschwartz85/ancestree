@@ -1,7 +1,7 @@
-# Ancestor Tree (anc-tree)
+# Ancestor Tree
 
 Static family-tree viewer built with HTML + Mermaid + CSV.
-
+[check it](https://danielschwartz85.github.io/ancestree/)
 ## What is in this repo
 
 - `index.html`: main page with:
@@ -58,24 +58,8 @@ Notes:
    - section nav/overview links still scroll to the right section
    - CSV search still works
 
-## Mermaid files
-
-At the moment, diagrams are embedded inline in `index.html`.
-
-- External `.mmd` files are not required for runtime.
-- If you keep external Mermaid source files in the future, treat them as authoring artifacts only unless you explicitly wire them into the page.
-
 ## Known conventions
 
 - Hebrew + English section descriptions are used in most subtree sections.
 - Tree display numbering in UI may not match section ID numbers exactly (for example, displayed tree `4` can map to `id="tree-5"`).
 - Overview map click targets are mapped in `jumpToTree` inside `index.html`.
-
-## Troubleshooting
-
-- Blank CSV table or fetch errors:
-  - ensure you are serving with `http://localhost...` and not `file://`
-- Mermaid parse error:
-  - check recent edits for unmatched quotes, invalid arrows, or malformed labels in a Mermaid block
-- Overview map node does not navigate:
-  - verify target IDs exist and mapping in `jumpToTree` is up to date
