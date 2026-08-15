@@ -355,11 +355,11 @@
                 <a href="#tree-1">1. שוורץ \ וינגרטן</a>
                 <a href="#tree-2">2. שוורץ \ חונה \ דנין</a>
                 <a href="#tree-3">3. לוי \ וישן</a>
-                <a href="#tree-5">4. פלוטניק עקרי</a>
-                <a href="#tree-7">5. אחימן \ בר לוי</a>
-                <a href="#tree-8">6. משפחת שמואל אלון / עומר ברק</a>
-                <a href="#tree-10">7. משפחת אורי ועמנואל</a>
-                <a href="#tree-9">8. לביא בארי שירה גיל אורי הלל ותמר</a>
+                <a href="#tree-4">4. פלוטניק עקרי</a>
+                <a href="#tree-5">5. אחימן \ בר לוי</a>
+                <a href="#tree-6">6. משפחת שמואל אלון / עומר ברק</a>
+                <a href="#tree-7">7. משפחת עמנואל</a>
+                <a href="#tree-8">8. לביא בארי שירה גיל אורי הלל ותמר</a>
                 <a href="#csv-data">📊 נתונים | CSV Data</a>
             </nav>
         </div>
@@ -382,7 +382,8 @@ flowchart LR
     T4["4. פלוטניק עקרי"]
     T5["5. אחימן \\\ בר לוי"]
     T6["6. משפחת שמואל אלון \\\ עומר ברק"]
-    T7["7. מפת הדור הצעיר"]
+    T7["8. מפת הדור הצעיר"]
+    T8["7. משפחת עמנואל"]
 
     LIVIO["ליביו שוורץ"]
     ODETTA["אודטה שוורץ"]
@@ -411,6 +412,8 @@ flowchart LR
     YAARA --> T7
     T2 --> T7
     T6 --> T7
+    T2 --> T8
+    T8 --> T7
 
     classDef branch fill:#eaf3ff,stroke:#4a90e2,color:#111,stroke-width:2px;
     classDef bridge fill:#fff2b2,stroke:#c9a900,color:#111,stroke-width:2px;
@@ -422,9 +425,10 @@ flowchart LR
     click T4 jumpToTree "מעבר לדיאגרמה 4"
     click T5 jumpToTree "מעבר לדיאגרמה 5"
     click T6 jumpToTree "מעבר לדיאגרמה 6"
-    click T7 jumpToTree "מעבר לדיאגרמה 7"
+    click T7 jumpToTree "מעבר לדיאגרמה 8"
+    click T8 jumpToTree "מעבר לדיאגרמה 7"
 
-    class T0,T1,T2,T3,T4,T5,T6,T7 branch;
+    class T0,T1,T2,T3,T4,T5,T6,T7,T8 branch;
     class LIVIO,ODETTA,ILANA,YAARA,RENANA,AYALA bridge;
                 </div>
             </div>
@@ -436,13 +440,13 @@ flowchart LR
             <p class="description">
                 משפחת פליקס מתחילה עם ישעיה-לייב אהרון שנשא את מרים, והולידו את משה פליקס (1895). משה נשא את רוזה וראו את אוסיאס פליקס (יליד 1896 ביאשי) ואת זאן פליקס.
                 <br>
-                אוסיאס נשא את שרה דבורה סופיה סלומון וראו שני ילדים: מריאטה וזאן. זאן נהרג בפוגרום יאשי בחודש יוני 1941. מריאטה נשאה את דב (ברקו) שוורץ והולידה את ליביו ואודטה שוורץ.
+                אוסיאס נשא את שרה דבורה סופיה סלומון וראו שלושה ילדים: מריאטה, זאן והלנה (נוצי). זאן נהרג בפוגרום יאשי בחודש יוני 1941. מריאטה נשאה את דב (ברקו) שוורץ והולידה את ליביו ואודטה שוורץ. הלנה נישאה לריקו מאיר, ונולדו להם יעל ואביבה.
                 <br>
                 לפי הרשומות ההיסטוריות שנמצאו, משה פליקס הוגדר כבעל פונדק דרכים, ובמסמך נישואין מ-1895 מופיעה חתימתו בעברית של ישעיה-לייב אהרון.
                 <br>
                 The Felix family begins with Isiah-Leib Aaron and Miriam, who had Moshe Felix (1895). Moshe married Roza and had Osias Felix (born 1896 in Iasi) and Jean Felix.
                 <br>
-                Osias married Sarah Deborah Sophia Salomon and had two children: Marietta and Jean. Jean was killed in the Iasi pogrom in June 1941. Marietta married David (Barco) Schwartz and had Livio and Odetta Schwartz.
+                Osias married Sarah Deborah Sophia Salomon and had three children: Marietta, Jean, and Helena (Nutzi). Jean was killed in the Iasi pogrom in June 1941. Marietta married David (Barco) Schwartz and had Livio and Odetta Schwartz. Helena married Rico Meir, and they had Yael and Aviva.
                 <br>
                 Historical records also identify Moshe Felix as an inn owner, and an 1895 marriage record preserves a Hebrew signature by Isiah-Leib Aaron.
             </p> 
@@ -463,19 +467,27 @@ flowchart TB
     OSI --- SARAH["שרה דבורה (סופיה) סלומון"]
     OSI --> JEAN["זאן פליקס<br/>(נהרג בפוגרום יאשי 1941)"]
     OSI --> MARIETTA["מריאטה"]
+    OSI --> HELENA["הלנה (נוצי)"]
     SARAH --> JEAN
     SARAH --> MARIETTA
+    SARAH --> HELENA
 
     MARIETTA --- BARCO["דב (ברקו) שוורץ"]
     MARIETTA --> LIVIO["ליביו שוורץ"]
     MARIETTA --> ODETTA["אודטה שוורץ"]
 
+    HELENA --- RICO_MEIR["ריקו מאיר"]
+    HELENA --> YAEL_HELENA["יעל"]
+    HELENA --> AVIVA_HELENA["אביבה"]
+    RICO_MEIR --> YAEL_HELENA
+    RICO_MEIR --> AVIVA_HELENA
+
     classDef male fill:#cfe8ff,stroke:#4a90e2,color:#111;
     classDef female fill:#ffd6e7,stroke:#d66b9c,color:#111;
     classDef deceased fill:#e8b4b8,stroke:#8b4a4a,color:#111;
 
-    class OSI_OLD,MOS,OSI,BARCO,LIVIO male;
-    class MIR,MIRLE,ROZ,SARAH,MARIETTA,ODETTA female;
+    class OSI_OLD,MOS,OSI,BARCO,LIVIO,RICO_MEIR male;
+    class MIR,MIRLE,ROZ,SARAH,MARIETTA,HELENA,ODETTA,YAEL_HELENA,AVIVA_HELENA female;
     class JEAN deceased;
                 </div>
             </div>
@@ -683,7 +695,7 @@ flowchart TB
         </div>
 
         <!-- Tree 5: Plotnic Akri -->
-        <div class="subtree-section" id="tree-5">
+        <div class="subtree-section" id="tree-4">
             <h2>4. פלוטניק עקרי | Plotnic Akri</h2>
             <p class="description">
                 מלי פלוטניק היא בתו של משה פלוטניק וזוגו של ליביו שוורץ. משפחתה, כולל אודי, בקי, ונועה, מהווה חלק חשוב מהענף הפלוטניק של עצנו.
@@ -750,7 +762,7 @@ flowchart TB
         </div>
 
         <!-- Tree 7: Yaara Achiman -->
-        <div class="subtree-section" id="tree-7">
+        <div class="subtree-section" id="tree-5">
             <h2>5. אחימן \ בר לוי | Achiman / Bar Levi</h2>
             <p class="description">
                 יערה אחימן היא בתו של רמי אחירם ויעל בר לוי. משפחתה, כולל בנים לביא וברי שלה, מהווה סוף מעניין בדרך משפחתית מסובכת.
@@ -811,13 +823,13 @@ flowchart TB
         </div>
 
         <!-- Tree 8: Alon Renna Ayala -->
-        <div class="subtree-section" id="tree-8">
+        <div class="subtree-section" id="tree-6">
             <h2>6. משפחת שמואל אלון / עומר ברק | Shmuel Alon / Omer Barak Family</h2>
             <p class="description">
                 רננה אחימן נשאה את שמואל (שמוליק) אלון, והם הנושאים של תמר והלל.
                 איילה אחימן הולידה ילדים לעומר ברק: גיל, שירה, ואורי.
                 <br>
-                Renna Achiman married Shmuel (Shmulik) Alon, and they were the parents of Tamar and Hillel (later adopted by Avital and Maya).
+                Renna Achiman married Shmuel (Shmulik) Alon, and they were the parents of Tamar and Hillel (being under the care of Avital and Maya).
                 Ayala Achiman had children with Omer Barak: Gil, Shira, and Uri.
             </p>
             <div class="mermaid-container">
@@ -875,27 +887,18 @@ flowchart TB
             </div>
         </div>
 
-        <!-- Tree 10: Uri & Emanuel -->
-        <div class="subtree-section" id="tree-10">
-            <h2>7. עצים של המשפחה של אורי (בעלה של רווית) ועמנואל | Uri & Emanuel Family Trees</h2>
+        <!-- Tree 10: Emanuel -->
+        <div class="subtree-section" id="tree-7">
+            <h2>7. משפחת עמנואל | Emanuel Family Tree</h2>
             <p class="description">
-                אזור זה מתמקד בשני ענפים נפרדים הקשורים לרווית: מצד אחד אורי וילדיו ג'וני ומיה, ומצד שני עמנואל ומשפחת המוצא שלו וכן בנו אוליבר מרווית.
+                אזור זה מתמקד בענף של עמנואל הקשור לרווית: משפחת המוצא של עמנואל, שני אחים למחצה מצד אמו שרה (ריקרדו ואנדרז), וכן בנו אוליבר מרווית. אנדרז נשוי לאנדראה ולהם שלושה ילדים: אלן, ניקו וחואן.
                 <br>
-                This section focuses on two separate branches connected to Ravit: on one side Uri and his children Johnny and Mia, and on the other side Emanuel's family of origin and his son Oliver with Ravit.
+                This section focuses on Emanuel's branch connected to Ravit: Emanuel's family of origin, two maternal half-brothers through his mother Sarah (Ricardo and Andres), and his son Oliver with Ravit. Andres is married to Andrea, and they have three children: Alan, Nico, and Juan.
             </p>
             <div class="mermaid-container">
                 <div class="mermaid">
 flowchart TB
-    RAVIT["רווית שוורץ"] --- URI["אורי"]
-    URI --- UM["אמא לא ידועה של ג'וני ומיה"]
-
-    URI --> JOHNNY["ג'וני"]
-    URI --> MIA["מיה"]
-    UM --> JOHNNY
-    UM --> MIA
-
-    RAVIT --> ROMI["רומי"]
-    URI --> ROMI
+    RAVIT["רווית שוורץ"] --> ROMI["רומי"]
 
     RAVIT --- EMANUEL["עמנואל"]
     RAVIT --> OLIVER["אוליבר"]
@@ -904,24 +907,36 @@ flowchart TB
     OSCAR["אוסקר"] --- SARAH["שרה"]
     OSCAR --> ELEANOR["אלינור"]
     OSCAR --> EMANUEL
-    E_BRO["אח נוסף של עמנואל"]
+    RICARDO["ריקרדו"]
+    ANDRES["אנדרז"]
+    ANDREA["אנדראה"]
+    ALAN["אלן"]
+    NICO["ניקו"]
+    JUAN["חואן"]
     SARAH --> ELEANOR
     SARAH --> EMANUEL
-    SARAH --> E_BRO
+    SARAH --> RICARDO
+    SARAH --> ANDRES
+
+    ANDRES --- ANDREA
+    ANDRES --> ALAN
+    ANDRES --> NICO
+    ANDRES --> JUAN
+    ANDREA --> ALAN
+    ANDREA --> NICO
+    ANDREA --> JUAN
 
     classDef male fill:#cfe8ff,stroke:#4a90e2,color:#111;
     classDef female fill:#ffd6e7,stroke:#d66b9c,color:#111;
-    classDef neutral fill:#f2f2f2,stroke:#999,color:#111;
 
-    class URI,EMANUEL,OSCAR,E_BRO,OLIVER,JOHNNY male;
-    class RAVIT,SARAH,ELEANOR,MIA,ROMI female;
-    class UM neutral;
+    class EMANUEL,OSCAR,OLIVER,RICARDO,ANDRES,ALAN,NICO,JUAN male;
+    class RAVIT,SARAH,ELEANOR,ROMI,ANDREA female;
                 </div>
             </div>
         </div>
 
         <!-- Tree 9: Schwartz Plotnic Achiman (Main Tree) -->
-        <div class="subtree-section" id="tree-9">
+        <div class="subtree-section" id="tree-8">
             <h2>8. לביא בארי שירה גיל אורי הלל ותמר | Lavi, Bari, Shira, Gil, Uri, Hillel & Tamar</h2>
             <p class="description">
                 זה העץ הרئיסי המקשר את כל הענפים יחד. לביא וברי הם בני יערה אחימן, ואילו גיל, שירה, ואורי הם ילדי איילה אחימן.
@@ -1018,10 +1033,11 @@ flowchart TB
                 T1: '#tree-1',
                 T2: '#tree-2',
                 T3: '#tree-3',
-                T4: '#tree-5',
-                T5: '#tree-7',
-                T6: '#tree-8',
-                T7: '#tree-9'
+                T4: '#tree-4',
+                T5: '#tree-5',
+                T6: '#tree-6',
+                T7: '#tree-8',
+                T8: '#tree-7'
             };
 
             const target = mapping[nodeId];
